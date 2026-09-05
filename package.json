@@ -2,8 +2,9 @@
   "name": "excalidrawagent",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run check && tsx main.ts",
-    "build": "tsc -p tsconfig.build.json",
+    "dev": "npm run check && npm run build:web && tsx main.ts",
+    "build": "tsc -p tsconfig.build.json && npm run build:web",
+    "build:web": "esbuild web/app.tsx --bundle --format=iife --jsx=automatic --conditions=production --loader:.woff2=file --loader:.woff=file --outfile=public/app.js --log-level=warning",
     "start": "node dist/main.js",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "tsx smoke.ts"
