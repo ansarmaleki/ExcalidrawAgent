@@ -1,0 +1,24 @@
+[
+  { "id": "create-03",
+    "input": "Draw a flowchart with Start, Process, and End boxes connected by arrows",
+    "expectedCharacteristics": [
+      "3 rectangle elements labeled Start, Process, End",
+      "2 arrow elements connecting them in sequence",
+      "no overlapping elements, left-to-right or top-to-bottom layout"],
+    "difficulty": "simple", "category": "create" },
+  { "id": "modify-01",
+    "input": "make the login box red",
+    "seed": {
+      "userPrompt": "draw two rectangles labeled login and database",
+      "assistantConfirmation": "Done. Login on the left, database on the right.",
+      "elements": [
+        { "id": "rect_login", "type": "rectangle", "x": 100, "y": 100,
+          "width": 200, "height": 80, "text": "login" },
+        { "id": "rect_db", "type": "rectangle", "x": 500, "y": 100,
+          "width": 200, "height": 80, "text": "database" } ] },
+    "expectedCharacteristics": [
+      "rect_login still exists and its backgroundColor changed",
+      "rect_db is untouched"],
+    "preservedIds": ["rect_login", "rect_db"],
+    "difficulty": "simple", "category": "modify" }
+]

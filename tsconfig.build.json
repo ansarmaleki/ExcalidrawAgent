@@ -6,5 +6,5 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "exclude": ["smoke.ts", "web"]
+  "exclude": ["smoke.ts", "web", "evals"]
 }

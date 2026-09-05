@@ -12,5 +12,5 @@
     "types": ["node"],
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["*.ts", "web/**/*.tsx", "web/**/*.d.ts"]
+  "include": ["*.ts", "evals/**/*.ts", "web/**/*.tsx", "web/**/*.d.ts"]
 }
