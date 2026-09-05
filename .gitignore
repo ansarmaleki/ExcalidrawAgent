@@ -1,0 +1,4 @@
+node_modules/
+canvas.svg
+dist/
+.env
