@@ -1,10 +1,45 @@
 // server.ts — serves the live Excalidraw canvas: the web page, the esbuild
-// bundle, and /api/canvas returning the agent's canvas JSON (the same array
-// the REPL mutates, serialized at request time). Framework-free on purpose.
+// bundle, /api/canvas returning the agent's canvas JSON (the same array the
+// REPL mutates, serialized at request time), and /api/stream pushing live
+// agent events (text deltas, tool status, turn end) to the browser via SSE.
+// Framework-free on purpose.
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import type { Element } from "./canvas.js";
+
+export type StreamEvent =
+  | { type: "delta"; text: string }
+  | { type: "tool"; name: string }
+  | { type: "end"; text: string }
+  | { type: "error"; message: string };
+
+export function createBus() {
+  const clients = new Set<http.ServerResponse>();
+  let lastReply = "";
+  return {
+    attach(res: http.ServerResponse) {
+      clients.add(res);
+      if (lastReply) res.write(`data: ${JSON.stringify({ type: "end", text: lastReply } as StreamEvent)}\n\n`);
+    },
+    detach(res: http.ServerResponse) {
+      clients.delete(res);
+    },
+    emit(ev: StreamEvent) {
+      if (ev.type === "end") lastReply = ev.text;
+      const frame = `data: ${JSON.stringify(ev)}\n\n`;
+      for (const res of clients) {
+        try {
+          res.write(frame);
+        } catch {
+          clients.delete(res); // dead socket — drop it
+        }
+      }
+    },
+  };
+}
+
+export type Bus = ReturnType<typeof createBus>;
 
 const MIME: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -33,12 +68,34 @@ function serveFile(res: http.ServerResponse, file: string): void {
   fs.createReadStream(file).pipe(res);
 }
 
-export function startServer(canvas: Element[], port = Number(process.env.PORT ?? 3457)) {
+export function startServer(canvas: Element[], port = Number(process.env.PORT ?? 3457), bus = createBus()) {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url ?? "/", `http://${req.headers.host ?? "localhost"}`);
     if (url.pathname === "/api/canvas") {
       res.writeHead(200, { "Content-Type": "application/json", "Cache-Control": "no-store" });
       res.end(JSON.stringify({ elements: canvas }));
+      return;
+    }
+    if (url.pathname === "/api/stream") {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache, no-transform",
+        Connection: "keep-alive",
+      });
+      res.flushHeaders();
+      res.write(": connected\n\n");
+      bus.attach(res);
+      const ping = setInterval(() => {
+        try {
+          res.write(": ping\n\n"); // keep-alive comment, ignored by EventSource
+        } catch {
+          /* cleanup below fires via close event */
+        }
+      }, 20_000);
+      req.on("close", () => {
+        clearInterval(ping);
+        bus.detach(res);
+      });
       return;
     }
     if (url.pathname === "/") {

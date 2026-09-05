@@ -13,11 +13,11 @@ const MAX_STEPS = 10;
 // Read env at CALL time, not import time — any entry point that imports this
 // module gets the right model regardless of import order.
 export function modelId(): string {
-  return process.env.OPENAI_MODEL!;
+  return process.env.OPENAI_MODEL ?? "gpt-4o-mini";
 }
 
 let model: ReturnType<typeof openai> | undefined;
-function getModel() {
+export function getModel() {
   return (model ??= openai(modelId())); // baseURL/key are read at request time
 }
 

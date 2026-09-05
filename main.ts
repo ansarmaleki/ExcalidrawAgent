@@ -1,17 +1,19 @@
-// main.ts — the REPL: every turn runs the agent against the shared canvas,
-// prints the reply, re-renders canvas.svg, saves the canvas to canvas.json
-// (reloaded on restart so the web view keeps the diagram), and serves the
-// live Excalidraw view at http://localhost:3457. The system prompt rides
-// along as `instructions` inside runTurn, so the message history starts empty.
+// main.ts — the REPL: every turn runs the agent against the shared canvas
+// with STREAMING text and live tool status (Part 3), re-renders canvas.svg,
+// saves the canvas to canvas.json (reloaded on restart so the web view keeps
+// the diagram), and serves the live Excalidraw view at http://localhost:3457
+// with the reply streamed to the browser over SSE. The system prompt rides
+// along as `instructions` inside streamTurn, so the message history starts empty.
 import "./env.js"; // loads .env before anything reads process.env
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import type { ModelMessage } from "ai";
-import { runTurn, modelId } from "./agent.js";
+import { modelId } from "./agent.js";
+import { streamTurn } from "./streaming.js";
 import { renderSvg } from "./svg.js";
-import { startServer } from "./server.js";
+import { startServer, createBus } from "./server.js";
 import type { Element } from "./canvas.js";
 
 if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === "sk-REPLACE_ME") {
@@ -43,9 +45,10 @@ function saveCanvas(canvas: Element[]): void {
 
 const canvas: Element[] = loadCanvas();
 const messages: ModelMessage[] = [];
+const bus = createBus();
 renderSvg(canvas);
 if (canvas.length) console.log(`Restored ${canvas.length} elements from canvas.json`);
-startServer(canvas); // live Excalidraw view — same array the tools mutate
+startServer(canvas, undefined, bus); // live Excalidraw view + SSE stream
 
 const rl = readline.createInterface({ input: stdin, output: stdout });
 console.log("Diagram agent ready. Type a request, or 'exit' to quit.");
@@ -63,10 +66,18 @@ while (true) {
   if (!user) continue;
   messages.push({ role: "user", content: user });
   try {
-    const reply = await runTurn(messages, canvas);
-    console.log(`\n${reply}\n`);
+    const reply = await streamTurn(messages, canvas, {
+      onTextDelta: (t) => { process.stdout.write(t); bus.emit({ type: "delta", text: t }); },
+      onToolCall: (n) => {
+        console.log(`\n ⚙ ${n} …`);
+        bus.emit({ type: "tool", name: n });
+      },
+    });
+    console.log("\n"); // the reply already streamed — just close the line
+    bus.emit({ type: "end", text: reply });
   } catch (e) {
     console.error(`\nError: ${e}\n`);
+    bus.emit({ type: "error", message: String(e) });
   }
   renderSvg(canvas);
   saveCanvas(canvas);
