@@ -7,6 +7,7 @@
     "build:web": "esbuild web/app.tsx --bundle --format=iife --jsx=automatic --conditions=production --loader:.woff2=file --loader:.woff=file --outfile=public/app.js --log-level=warning",
     "start": "node dist/main.js",
     "eval": "tsx evals/runEvals.ts",
+    "score": "tsx evals/scoreRun.ts",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "tsx smoke.ts"
   },
