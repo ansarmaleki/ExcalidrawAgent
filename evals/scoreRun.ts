@@ -52,7 +52,7 @@ function scoreFile(file: string) {
 const runs = process.argv.slice(2).map(scoreFile);
 const names = Object.keys(SCORERS);
 const label = (s: string) => s.padEnd(13);
-console.log(label("scorer") + runs.map((r) => path.basename(r.file).padEnd(20)).join(""));
+console.log(label("scorer") + runs.map((r) => path.basename(r.file).slice(-17).padEnd(20)).join(""));
 for (const name of names) {
   const row = runs.map((r) => {
     const count = r.counts[name] ?? 0;

@@ -6,6 +6,20 @@
       "2 arrow elements connecting them in sequence",
       "no overlapping elements, left-to-right or top-to-bottom layout"],
     "difficulty": "simple", "category": "create" },
+  { "id": "create-04",
+    "input": "Draw an org chart: one CEO box on top with three manager boxes below, connected by arrows",
+    "expectedCharacteristics": [
+      "4 rectangle elements labeled CEO, Manager",
+      "3 arrow elements connecting CEO to each manager",
+      "no overlapping elements, top-to-bottom layout"],
+    "difficulty": "medium", "category": "create" },
+  { "id": "create-05",
+    "input": "Draw a decision flow: a Start box, then a diamond asking valid?, then two rectangles for yes and no outcomes",
+    "expectedCharacteristics": [
+      "2 rectangle elements labeled Start and outcomes",
+      "1 diamond element for the decision",
+      "arrows connecting Start to the diamond and the diamond to both outcomes"],
+    "difficulty": "medium", "category": "create" },
   { "id": "modify-01",
     "input": "make the login box red",
     "seed": {
@@ -20,5 +34,135 @@
       "rect_login still exists and its backgroundColor changed",
       "rect_db is untouched"],
     "preservedIds": ["rect_login", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-02",
+    "input": "rename the database box to Postgres",
+    "seed": {
+      "userPrompt": "draw two rectangles labeled login and database",
+      "assistantConfirmation": "Done. Login on the left, database on the right.",
+      "elements": [
+        { "id": "rect_login", "type": "rectangle", "x": 100, "y": 100,
+          "width": 200, "height": 80, "text": "login" },
+        { "id": "rect_db", "type": "rectangle", "x": 500, "y": 100,
+          "width": 200, "height": 80, "text": "database" } ] },
+    "expectedCharacteristics": [
+      "rect_db still exists and its text changed to Postgres",
+      "rect_login is untouched"],
+    "preservedIds": ["rect_login", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-03",
+    "input": "make the header box blue",
+    "seed": {
+      "userPrompt": "draw a simple website wireframe with a header, a sidebar and a content area",
+      "assistantConfirmation": "Done. Header on top, sidebar and content below.",
+      "elements": [
+        { "id": "rect_header", "type": "rectangle", "x": 100, "y": 60,
+          "width": 400, "height": 60, "text": "header" },
+        { "id": "rect_sidebar", "type": "rectangle", "x": 100, "y": 140,
+          "width": 120, "height": 300, "text": "sidebar" },
+        { "id": "rect_content", "type": "rectangle", "x": 240, "y": 140,
+          "width": 260, "height": 300, "text": "content" } ] },
+    "expectedCharacteristics": [
+      "rect_header still exists and its backgroundColor changed",
+      "rect_sidebar and rect_content are untouched"],
+    "preservedIds": ["rect_header", "rect_sidebar", "rect_content"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-04",
+    "input": "move the login box 100 pixels to the right",
+    "seed": {
+      "userPrompt": "draw two rectangles labeled login and database",
+      "assistantConfirmation": "Done. Login on the left, database on the right.",
+      "elements": [
+        { "id": "rect_login", "type": "rectangle", "x": 100, "y": 100,
+          "width": 200, "height": 80, "text": "login" },
+        { "id": "rect_db", "type": "rectangle", "x": 500, "y": 100,
+          "width": 200, "height": 80, "text": "database" } ] },
+    "expectedCharacteristics": [
+      "rect_login still exists and moved horizontally",
+      "rect_db is untouched"],
+    "preservedIds": ["rect_login", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-05",
+    "input": "make the api box wider",
+    "seed": {
+      "userPrompt": "draw an architecture diagram with an api box and a db box",
+      "assistantConfirmation": "Done. API on the left, DB on the right.",
+      "elements": [
+        { "id": "rect_api", "type": "rectangle", "x": 100, "y": 120,
+          "width": 160, "height": 80, "text": "api" },
+        { "id": "rect_db", "type": "rectangle", "x": 500, "y": 120,
+          "width": 160, "height": 80, "text": "db" } ] },
+    "expectedCharacteristics": [
+      "rect_api still exists and its width increased",
+      "rect_db is untouched"],
+    "preservedIds": ["rect_api", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-06",
+    "input": "swap the colors: make the start box green and the end box red",
+    "seed": {
+      "userPrompt": "draw a flowchart with a start box and an end box connected by an arrow",
+      "assistantConfirmation": "Done. Start on the left, end on the right.",
+      "elements": [
+        { "id": "rect_start", "type": "rectangle", "x": 100, "y": 120,
+          "width": 160, "height": 80, "text": "Start" },
+        { "id": "arrow_1", "type": "arrow", "x": 260, "y": 160,
+          "width": 140, "height": 0 },
+        { "id": "rect_end", "type": "rectangle", "x": 400, "y": 120,
+          "width": 160, "height": 80, "text": "End" } ] },
+    "expectedCharacteristics": [
+      "rect_start and rect_end still exist with backgroundColor set",
+      "arrow_1 is untouched"],
+    "preservedIds": ["rect_start", "arrow_1", "rect_end"],
+    "difficulty": "medium", "category": "modify" },
+  { "id": "modify-07",
+    "input": "make the user node yellow",
+    "seed": {
+      "userPrompt": "draw a signup flow: a user ellipse, a signup rectangle and a db rectangle connected by arrows",
+      "assistantConfirmation": "Done. User, signup and DB laid out left to right.",
+      "elements": [
+        { "id": "ellipse_user", "type": "ellipse", "x": 80, "y": 120,
+          "width": 140, "height": 80, "text": "user" },
+        { "id": "rect_signup", "type": "rectangle", "x": 300, "y": 120,
+          "width": 160, "height": 80, "text": "signup" },
+        { "id": "rect_db", "type": "rectangle", "x": 520, "y": 120,
+          "width": 160, "height": 80, "text": "db" } ] },
+    "expectedCharacteristics": [
+      "ellipse_user still exists and its backgroundColor changed",
+      "rect_signup and rect_db are untouched"],
+    "preservedIds": ["ellipse_user", "rect_signup", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-08",
+    "input": "rename the error box to Failed",
+    "seed": {
+      "userPrompt": "draw a tiny flow: a submit box, an arrow, and an error box",
+      "assistantConfirmation": "Done. Submit, arrow, error — left to right.",
+      "elements": [
+        { "id": "rect_submit", "type": "rectangle", "x": 80, "y": 120,
+          "width": 140, "height": 60, "text": "submit" },
+        { "id": "arrow_1", "type": "arrow", "x": 220, "y": 150,
+          "width": 80, "height": 0 },
+        { "id": "rect_err", "type": "rectangle", "x": 300, "y": 120,
+          "width": 140, "height": 60, "text": "error" } ] },
+    "expectedCharacteristics": [
+      "rect_err still exists and its text changed to Failed",
+      "rect_submit and arrow_1 are untouched"],
+    "preservedIds": ["rect_submit", "arrow_1", "rect_err"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-09",
+    "input": "recolor the cache box orange",
+    "seed": {
+      "userPrompt": "draw a pipeline: a client box, a cache box and a server box connected by arrows",
+      "assistantConfirmation": "Done. Client, cache, server — left to right with arrows.",
+      "elements": [
+        { "id": "rect_client", "type": "rectangle", "x": 80, "y": 120,
+          "width": 140, "height": 60, "text": "client" },
+        { "id": "rect_cache", "type": "rectangle", "x": 300, "y": 120,
+          "width": 140, "height": 60, "text": "cache" },
+        { "id": "rect_server", "type": "rectangle", "x": 520, "y": 120,
+          "width": 140, "height": 60, "text": "server" } ] },
+    "expectedCharacteristics": [
+      "rect_cache still exists and its backgroundColor changed",
+      "rect_client and rect_server are untouched"],
+    "preservedIds": ["rect_client", "rect_cache", "rect_server"],
     "difficulty": "simple", "category": "modify" }
 ]
