@@ -49,7 +49,7 @@ let messages: ModelMessage[] = []; // compactHistory returns a new array
 const bus = createBus();
 renderSvg(canvas);
 if (canvas.length) console.log(`Restored ${canvas.length} elements from canvas.json`);
-startServer(canvas, undefined, bus); // live Excalidraw view + SSE stream
+const server = startServer(canvas, undefined, bus); // live view + SSE stream
 
 const rl = readline.createInterface({ input: stdin, output: stdout });
 
@@ -104,3 +104,5 @@ while (true) {
 }
 
 rl.close();
+server.close(); // the listening socket keeps the event loop alive otherwise
+process.exit(0);

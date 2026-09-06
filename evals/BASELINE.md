@@ -1,5 +1,42 @@
 # Baselines — eval history, newest first
 
+## After Part 7 (advanced tool use) — 2026-09-06
+
+- **Run:** `evals/results/2026-09-06T07-14-11-256Z.json` (five focused tools + query-on-demand + keyless DuckDuckGo web search; canvas state no longer embedded in instructions)
+- **Pre-Part-7 run:** `evals/results/2026-09-06T07-06-58-747Z.json`
+
+| Scorer      | Pre-Part-7 | Post-Part-7 | Δ |
+|-------------|------------|-------------|---|
+| Schema      | 100.0%     | 100.0%      | — |
+| Structure   | 90.3%      | 90.3%       | — |
+| Preservation| 100.0%     | 100.0%      | — |
+| Keywords    | n/a        | n/a         | — |
+| avg ms      | 5354       | 8067 (+51%) | see below |
+
+**Verdict — shipped. Scores flat (saturated), one honest duration caveat:**
+
+- Preservation was already 100% pre-swap, so the additive `add_elements` couldn't lift the number — but it makes preservation STRUCTURAL (add physically cannot clobber; remove is the only deletion path) instead of dependent on the model choosing to reuse ids. The 3 add-cases verify the new path works (modify-10: cache added between api/db, both seed ids intact).
+- Duration: the +51% average is one 49s create-04 outlier; excluding it the run averages ~5.1s (−4%). Structural cost observed: modify turns pay one extra round trip for `query_canvas` first (~+1.3s on modify-01) — the handout's −41% assumed a naive baseline that regenerated whole diagrams per change; ours already made single calls, so there was nothing to reclaim.
+- `update_elements` reports unknown ids so the model self-corrects; batch updates cut call count on multi-element changes.
+- search_web (DuckDuckGo Instant Answers, keyless — no OpenAI key on this stack): verified live; errors return as `{"error":...}`, results condensed to ≤2000 chars. Thin on niche technical queries, as expected for an instant-answer API.
+
+## Pre-Part-7 baseline (15 cases) — 2026-09-06
+
+- **Run:** `evals/results/2026-09-06T07-06-58-747Z.json` (Goldilocks prompt + canvas state, naive two-tool surface)
+- **Dataset:** 15 cases — 3 create, 12 modify (9 recolor/rename/move/resize + 3 new "add" cases modify-10/11/12).
+- **Endpoint / model:** https://api.deepseek.com / deepseek-v4-flash
+
+| Scorer      | Baseline | Notes |
+|-------------|----------|-------|
+| Schema      | 100.0%   | All runs valid. |
+| Structure   | 90.3%    | Remaining gap: shape drift on create cases (ellipses vs rectangles, stray text elements). |
+| Preservation| 100.0%   | Prediction FAILED honestly: even the 3 add-cases preserved seed ids under naive tools — the model regenerates the full diagram but reuses the exact ids it saw in canvas state + seeded history. The handout's "naive tools crater preservation on add" does not reproduce on this model. |
+| Keywords    | n/a      | No domain cases yet. |
+
+Duration: 15 cases, 0 errored, avg 5354ms.
+
+**What Part 7 can therefore prove here:** Preservation is saturated; the measurable targets are Structure (focused tools reduce regeneration-style sloppiness) and duration (canvas state leaves the every-turn prompt; query-on-demand instead). The mechanism win — preservation made STRUCTURAL (add_elements physically cannot clobber) rather than prompt-dependent — remains valuable regardless of scores.
+
 ## After Part 6 (context engineering) — 2026-09-05
 
 - **Run:** `evals/results/2026-09-05T14-18-25-302Z.json` (Goldilocks prompt + canvas state in instructions, compaction in REPL)

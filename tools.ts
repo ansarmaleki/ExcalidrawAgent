@@ -5,7 +5,7 @@ import { tool } from "ai";
 import { z } from "zod";
 import { applyGenerate, applyModify, type Element } from "./canvas.js";
 
-const elementSchema = z.object({
+export const elementSchema = z.object({
   id: z.string().describe("Unique id, e.g. 'rect_login'"),
   type: z.enum(["rectangle", "ellipse", "diamond", "text", "arrow", "line"]),
   x: z.number(), y: z.number(), width: z.number(), height: z.number(),

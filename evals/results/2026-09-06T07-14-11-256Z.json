@@ -1,0 +1,653 @@
+[
+  {
+    "id": "create-03",
+    "input": "Draw a flowchart with Start, Process, and End boxes connected by arrows",
+    "text": "Here's a simple flowchart with Start, Process, and End boxes connected by arrows:\n\n- **Start** (green ellipse) at the top\n- **Process** (blue rectangle) in the middle\n- **End** (red ellipse) at the bottom\n- **Arrows** pointing downward connecting each step\n\nWould you like me to add more process steps, decision diamonds, or branch paths?",
+    "elements": [
+      {
+        "id": "ellipse_start",
+        "type": "ellipse",
+        "x": 240,
+        "y": 50,
+        "width": 120,
+        "height": 60,
+        "text": "Start",
+        "strokeColor": "#2b8a3e",
+        "backgroundColor": "#d3f9d8"
+      },
+      {
+        "id": "arrow_start_process",
+        "type": "arrow",
+        "x": 300,
+        "y": 110,
+        "width": 0,
+        "height": 70
+      },
+      {
+        "id": "rect_process",
+        "type": "rectangle",
+        "x": 220,
+        "y": 180,
+        "width": 160,
+        "height": 80,
+        "text": "Process",
+        "strokeColor": "#1971c2",
+        "backgroundColor": "#a5d8ff"
+      },
+      {
+        "id": "arrow_process_end",
+        "type": "arrow",
+        "x": 300,
+        "y": 260,
+        "width": 0,
+        "height": 70
+      },
+      {
+        "id": "ellipse_end",
+        "type": "ellipse",
+        "x": 240,
+        "y": 330,
+        "width": 120,
+        "height": 60,
+        "text": "End",
+        "strokeColor": "#c92a2a",
+        "backgroundColor": "#ffc9c9"
+      }
+    ],
+    "ms": 8491,
+    "error": null
+  },
+  {
+    "id": "create-04",
+    "input": "Draw an org chart: one CEO box on top with three manager boxes below, connected by arrows",
+    "text": "Here's your org chart — a CEO box at the top connected by arrows to three manager boxes below.\n\n**Structure created:**\n- **CEO** (top center, blue tint)\n- **Manager A / Manager B / Manager C** (second row, green tint)\n- Arrows from the CEO's bottom edge down to each manager's top\n\nLayout overview:\n- CEO centered at the top (y=60)\n- Three managers spread evenly across the row below (y=300)\n- Arrows fan out from the CEO to each manager\n\nIf you'd like, I can:\n- Add real names/titles to the boxes\n- Add a **VP/CTO/CFO** tier, or more direct reports under each manager\n- Change the layout (e.g., horizontal instead of vertical)\n- Recolor boxes or arrows\n\nJust let me know!",
+    "elements": [
+      {
+        "id": "rect_ceo",
+        "type": "rectangle",
+        "x": 320,
+        "y": 60,
+        "width": 160,
+        "height": 80,
+        "text": "CEO",
+        "backgroundColor": "#dbeafe",
+        "fontSize": 20
+      },
+      {
+        "id": "rect_mgr1",
+        "type": "rectangle",
+        "x": 60,
+        "y": 300,
+        "width": 160,
+        "height": 80,
+        "text": "Manager A",
+        "backgroundColor": "#e6fcf5",
+        "fontSize": 18
+      },
+      {
+        "id": "rect_mgr2",
+        "type": "rectangle",
+        "x": 320,
+        "y": 300,
+        "width": 160,
+        "height": 80,
+        "text": "Manager B",
+        "backgroundColor": "#e6fcf5",
+        "fontSize": 18
+      },
+      {
+        "id": "rect_mgr3",
+        "type": "rectangle",
+        "x": 580,
+        "y": 300,
+        "width": 160,
+        "height": 80,
+        "text": "Manager C",
+        "backgroundColor": "#e6fcf5",
+        "fontSize": 18
+      },
+      {
+        "id": "arrow_ceo_m1",
+        "type": "arrow",
+        "x": 400,
+        "y": 140,
+        "width": -260,
+        "height": 160,
+        "text": ""
+      },
+      {
+        "id": "arrow_ceo_m2",
+        "type": "arrow",
+        "x": 400,
+        "y": 140,
+        "width": 0,
+        "height": 160,
+        "text": ""
+      },
+      {
+        "id": "arrow_ceo_m3",
+        "type": "arrow",
+        "x": 400,
+        "y": 140,
+        "width": 260,
+        "height": 160,
+        "text": ""
+      }
+    ],
+    "ms": 49155,
+    "error": null
+  },
+  {
+    "id": "create-05",
+    "input": "Draw a decision flow: a Start box, then a diamond asking valid?, then two rectangles for yes and no outcomes",
+    "text": "I've drawn the decision flow:\n\n- **Start box** (top, blue) → arrow down to\n- **valid? diamond** (orange) → branches:\n  - **Yes** arrow to the right → **Yes outcome** rectangle (green)\n  - **No** arrow straight down → **No outcome** rectangle (red)\n\nLet me know if you'd like the branches swapped, labels changed, or additional nodes (e.g., actions after each outcome).",
+    "elements": [
+      {
+        "id": "rect_start",
+        "type": "rectangle",
+        "x": 340,
+        "y": 40,
+        "width": 120,
+        "height": 60,
+        "text": "Start",
+        "strokeColor": "#1c7ed6",
+        "backgroundColor": "#d0ebff",
+        "fontSize": 16
+      },
+      {
+        "id": "arrow_start_valid",
+        "type": "arrow",
+        "x": 396,
+        "y": 100,
+        "width": 8,
+        "height": 50,
+        "strokeColor": "#495057"
+      },
+      {
+        "id": "diamond_valid",
+        "type": "diamond",
+        "x": 330,
+        "y": 150,
+        "width": 140,
+        "height": 80,
+        "text": "valid?",
+        "strokeColor": "#f08c00",
+        "backgroundColor": "#fff3bf",
+        "fontSize": 16
+      },
+      {
+        "id": "arrow_valid_yes",
+        "type": "arrow",
+        "x": 470,
+        "y": 187,
+        "width": 60,
+        "height": 6,
+        "strokeColor": "#495057"
+      },
+      {
+        "id": "text_yes",
+        "type": "text",
+        "x": 492,
+        "y": 168,
+        "width": 30,
+        "height": 20,
+        "text": "Yes",
+        "fontSize": 14
+      },
+      {
+        "id": "rect_yes",
+        "type": "rectangle",
+        "x": 530,
+        "y": 160,
+        "width": 140,
+        "height": 60,
+        "text": "Yes outcome",
+        "strokeColor": "#2f9e44",
+        "backgroundColor": "#d3f9d8",
+        "fontSize": 16
+      },
+      {
+        "id": "arrow_valid_no",
+        "type": "arrow",
+        "x": 396,
+        "y": 230,
+        "width": 8,
+        "height": 70,
+        "strokeColor": "#495057"
+      },
+      {
+        "id": "text_no",
+        "type": "text",
+        "x": 360,
+        "y": 252,
+        "width": 30,
+        "height": 20,
+        "text": "No",
+        "fontSize": 14
+      },
+      {
+        "id": "rect_no",
+        "type": "rectangle",
+        "x": 340,
+        "y": 300,
+        "width": 120,
+        "height": 60,
+        "text": "No outcome",
+        "strokeColor": "#e03131",
+        "backgroundColor": "#ffe3e3",
+        "fontSize": 16
+      }
+    ],
+    "ms": 20426,
+    "error": null
+  },
+  {
+    "id": "modify-01",
+    "input": "make the login box red",
+    "text": "Done — the login box is now red.",
+    "elements": [
+      {
+        "id": "rect_login",
+        "type": "rectangle",
+        "x": 100,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "login",
+        "backgroundColor": "#fa5252"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 500,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "database"
+      }
+    ],
+    "ms": 3776,
+    "error": null
+  },
+  {
+    "id": "modify-02",
+    "input": "rename the database box to Postgres",
+    "text": "Done — the database box is now labeled \"Postgres\".",
+    "elements": [
+      {
+        "id": "rect_login",
+        "type": "rectangle",
+        "x": 100,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "login"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 500,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "Postgres"
+      }
+    ],
+    "ms": 2794,
+    "error": null
+  },
+  {
+    "id": "modify-03",
+    "input": "make the header box blue",
+    "text": "The header box is now blue.",
+    "elements": [
+      {
+        "id": "rect_header",
+        "type": "rectangle",
+        "x": 100,
+        "y": 60,
+        "width": 400,
+        "height": 60,
+        "text": "header",
+        "backgroundColor": "#228be6"
+      },
+      {
+        "id": "rect_sidebar",
+        "type": "rectangle",
+        "x": 100,
+        "y": 140,
+        "width": 120,
+        "height": 300,
+        "text": "sidebar"
+      },
+      {
+        "id": "rect_content",
+        "type": "rectangle",
+        "x": 240,
+        "y": 140,
+        "width": 260,
+        "height": 300,
+        "text": "content"
+      }
+    ],
+    "ms": 3376,
+    "error": null
+  },
+  {
+    "id": "modify-04",
+    "input": "move the login box 100 pixels to the right",
+    "text": "Done — moved the login box 100 pixels to the right (now at x=200).",
+    "elements": [
+      {
+        "id": "rect_login",
+        "type": "rectangle",
+        "x": 200,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "login"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 500,
+        "y": 100,
+        "width": 200,
+        "height": 80,
+        "text": "database"
+      }
+    ],
+    "ms": 3707,
+    "error": null
+  },
+  {
+    "id": "modify-05",
+    "input": "make the api box wider",
+    "text": "Done — the API box is now wider (220px instead of 160px).",
+    "elements": [
+      {
+        "id": "rect_api",
+        "type": "rectangle",
+        "x": 100,
+        "y": 120,
+        "width": 220,
+        "height": 80,
+        "text": "api"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 500,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "db"
+      }
+    ],
+    "ms": 2951,
+    "error": null
+  },
+  {
+    "id": "modify-06",
+    "input": "swap the colors: make the start box green and the end box red",
+    "text": "Done! The start box is now green and the end box is red.",
+    "elements": [
+      {
+        "id": "rect_start",
+        "type": "rectangle",
+        "x": 100,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "Start",
+        "backgroundColor": "#40c057"
+      },
+      {
+        "id": "arrow_1",
+        "type": "arrow",
+        "x": 260,
+        "y": 160,
+        "width": 140,
+        "height": 0
+      },
+      {
+        "id": "rect_end",
+        "type": "rectangle",
+        "x": 400,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "End",
+        "backgroundColor": "#fa5252"
+      }
+    ],
+    "ms": 4120,
+    "error": null
+  },
+  {
+    "id": "modify-07",
+    "input": "make the user node yellow",
+    "text": "The user node is now yellow.",
+    "elements": [
+      {
+        "id": "ellipse_user",
+        "type": "ellipse",
+        "x": 80,
+        "y": 120,
+        "width": 140,
+        "height": 80,
+        "text": "user",
+        "backgroundColor": "#ffd43b"
+      },
+      {
+        "id": "rect_signup",
+        "type": "rectangle",
+        "x": 300,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "signup"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 520,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "db"
+      }
+    ],
+    "ms": 3038,
+    "error": null
+  },
+  {
+    "id": "modify-08",
+    "input": "rename the error box to Failed",
+    "text": "Updated the error box label to \"Failed\".",
+    "elements": [
+      {
+        "id": "rect_submit",
+        "type": "rectangle",
+        "x": 80,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "submit"
+      },
+      {
+        "id": "arrow_1",
+        "type": "arrow",
+        "x": 220,
+        "y": 150,
+        "width": 80,
+        "height": 0
+      },
+      {
+        "id": "rect_err",
+        "type": "rectangle",
+        "x": 300,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "Failed"
+      }
+    ],
+    "ms": 2832,
+    "error": null
+  },
+  {
+    "id": "modify-09",
+    "input": "recolor the cache box orange",
+    "text": "The cache box is now orange.",
+    "elements": [
+      {
+        "id": "rect_client",
+        "type": "rectangle",
+        "x": 80,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "client"
+      },
+      {
+        "id": "rect_cache",
+        "type": "rectangle",
+        "x": 300,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "cache",
+        "backgroundColor": "#fa8c16"
+      },
+      {
+        "id": "rect_server",
+        "type": "rectangle",
+        "x": 520,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "server"
+      }
+    ],
+    "ms": 3668,
+    "error": null
+  },
+  {
+    "id": "modify-10",
+    "input": "add a cache box between the api and the db",
+    "text": "Added the cache box between api and db.",
+    "elements": [
+      {
+        "id": "rect_api",
+        "type": "rectangle",
+        "x": 100,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "api"
+      },
+      {
+        "id": "rect_db",
+        "type": "rectangle",
+        "x": 520,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "db"
+      },
+      {
+        "id": "rect_cache",
+        "type": "rectangle",
+        "x": 310,
+        "y": 120,
+        "width": 160,
+        "height": 80,
+        "text": "cache"
+      }
+    ],
+    "ms": 3537,
+    "error": null
+  },
+  {
+    "id": "modify-11",
+    "input": "add a load balancer box in front of the server",
+    "text": "Added a load balancer box between the client and server.",
+    "elements": [
+      {
+        "id": "rect_client",
+        "type": "rectangle",
+        "x": 80,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "client"
+      },
+      {
+        "id": "rect_server",
+        "type": "rectangle",
+        "x": 520,
+        "y": 120,
+        "width": 140,
+        "height": 60,
+        "text": "server"
+      },
+      {
+        "id": "rect_lb",
+        "type": "rectangle",
+        "x": 320,
+        "y": 120,
+        "width": 150,
+        "height": 60,
+        "text": "load balancer"
+      }
+    ],
+    "ms": 4210,
+    "error": null
+  },
+  {
+    "id": "modify-12",
+    "input": "add a new manager box next to the other managers",
+    "text": "Added Manager 3 next to Manager 2, on the same row.",
+    "elements": [
+      {
+        "id": "rect_ceo",
+        "type": "rectangle",
+        "x": 260,
+        "y": 60,
+        "width": 160,
+        "height": 60,
+        "text": "CEO"
+      },
+      {
+        "id": "rect_mgr1",
+        "type": "rectangle",
+        "x": 80,
+        "y": 240,
+        "width": 160,
+        "height": 60,
+        "text": "Manager 1"
+      },
+      {
+        "id": "rect_mgr2",
+        "type": "rectangle",
+        "x": 440,
+        "y": 240,
+        "width": 160,
+        "height": 60,
+        "text": "Manager 2"
+      },
+      {
+        "id": "rect_mgr3",
+        "type": "rectangle",
+        "x": 640,
+        "y": 240,
+        "width": 160,
+        "height": 60,
+        "text": "Manager 3"
+      }
+    ],
+    "ms": 4925,
+    "error": null
+  }
+]

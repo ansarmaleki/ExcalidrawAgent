@@ -164,5 +164,55 @@
       "rect_cache still exists and its backgroundColor changed",
       "rect_client and rect_server are untouched"],
     "preservedIds": ["rect_client", "rect_cache", "rect_server"],
-    "difficulty": "simple", "category": "modify" }
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-10",
+    "input": "add a cache box between the api and the db",
+    "seed": {
+      "userPrompt": "draw two rectangles labeled api and db",
+      "assistantConfirmation": "Done. API on the left, DB on the right.",
+      "elements": [
+        { "id": "rect_api", "type": "rectangle", "x": 100, "y": 120,
+          "width": 160, "height": 80, "text": "api" },
+        { "id": "rect_db", "type": "rectangle", "x": 520, "y": 120,
+          "width": 160, "height": 80, "text": "db" } ] },
+    "expectedCharacteristics": [
+      "3 rectangle elements labeled api, db and cache",
+      "rect_api and rect_db still exist at their original positions",
+      "the new cache box is placed between api and db"],
+    "preservedIds": ["rect_api", "rect_db"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-11",
+    "input": "add a load balancer box in front of the server",
+    "seed": {
+      "userPrompt": "draw a client box and a server box",
+      "assistantConfirmation": "Done. Client on the left, server on the right.",
+      "elements": [
+        { "id": "rect_client", "type": "rectangle", "x": 80, "y": 120,
+          "width": 140, "height": 60, "text": "client" },
+        { "id": "rect_server", "type": "rectangle", "x": 520, "y": 120,
+          "width": 140, "height": 60, "text": "server" } ] },
+    "expectedCharacteristics": [
+      "3 rectangle elements labeled client, server and load balancer",
+      "rect_client and rect_server still exist",
+      "the load balancer sits between client and server"],
+    "preservedIds": ["rect_client", "rect_server"],
+    "difficulty": "simple", "category": "modify" },
+  { "id": "modify-12",
+    "input": "add a new manager box next to the other managers",
+    "seed": {
+      "userPrompt": "draw an org chart with a CEO on top and two managers below",
+      "assistantConfirmation": "Done. CEO on top, Manager 1 and Manager 2 below.",
+      "elements": [
+        { "id": "rect_ceo", "type": "rectangle", "x": 260, "y": 60,
+          "width": 160, "height": 60, "text": "CEO" },
+        { "id": "rect_mgr1", "type": "rectangle", "x": 80, "y": 240,
+          "width": 160, "height": 60, "text": "Manager 1" },
+        { "id": "rect_mgr2", "type": "rectangle", "x": 440, "y": 240,
+          "width": 160, "height": 60, "text": "Manager 2" } ] },
+    "expectedCharacteristics": [
+      "4 rectangle elements labeled CEO and managers",
+      "rect_ceo, rect_mgr1 and rect_mgr2 still exist",
+      "the new manager box is on the same row as the other managers"],
+    "preservedIds": ["rect_ceo", "rect_mgr1", "rect_mgr2"],
+    "difficulty": "medium", "category": "modify" }
 ]

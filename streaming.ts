@@ -5,9 +5,7 @@
 // callbacks (terminal printing, SSE bus, or nothing — the eval harness of
 // Part 4 will keep using runTurn).
 import { streamText, isStepCount, type ModelMessage } from "ai";
-import { getModel, BASE_PROMPT } from "./agent.js";
-import { makeTools } from "./tools.js";
-import { buildSystem } from "./context.js";
+import { getModel, BASE_PROMPT, makeToolSet } from "./agent.js";
 import type { Element } from "./canvas.js";
 
 const MAX_STEPS = 10;
@@ -24,9 +22,9 @@ export async function streamTurn(
 ): Promise<string> {
   const result = streamText({
     model: getModel(),
-    instructions: buildSystem(BASE_PROMPT, canvas), // fresh state every turn
+    instructions: BASE_PROMPT, // query_canvas reads state on demand (Part 7)
     messages,
-    tools: makeTools(canvas), // execute() mutates this canvas
+    tools: makeToolSet(canvas), // execute() mutates this canvas
     stopWhen: isStepCount(MAX_STEPS),
   });
 
